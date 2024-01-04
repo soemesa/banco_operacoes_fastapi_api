@@ -1,23 +1,13 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.orm import Session
 
 from src.settings import Settings
 
-# engine = create_engine(
-#     Settings().DATABASE_URL
-# )
-# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# def get_db():
-#     db = SessionLocal()
-#     try:
-#         yield db
-#     finally:
-#         db.close()
-#
-#
-#
+engine = create_engine(Settings().DATABASE_URL)
 
 
-class BaseModel(DeclarativeBase):
-    pass
+def get_session():
+    with Session(engine) as session:
+        yield session
+
+
