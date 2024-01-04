@@ -1,11 +1,7 @@
-from fastapi import Depends
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session
-from starlette.responses import Response
 
-from src.database import get_session
 from src.models import Conta
-from src.schemas import TransacaoEntrada, TransacaoSalida
+from src.schemas import TransacaoSalida
 
 class Service:
     @staticmethod
@@ -24,5 +20,9 @@ class Service:
             return TransacaoSalida(status='error', message=f'{err}')
 
         return TransacaoSalida(status='created', message='Número de conta adicionado com sucesso!')
+
+    # @staticmethod
+    # def buscar_transacoes(response, transacao, session):
+    #     pass
 
 

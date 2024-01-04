@@ -10,7 +10,10 @@ class TransacaoSalida(BaseModel):
     status: str
     message: str
 
+class Transacao(BaseModel):
+    id: int
+    numero_de_conta: int
+    valor: float
 
-class TransacaoList(BaseModel):
-    transacoes: list[TransacaoSalida]
-
+class TransacoesList(BaseModel):
+    transacoes_list: list[Transacao]
