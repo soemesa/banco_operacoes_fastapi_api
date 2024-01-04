@@ -1,13 +1,14 @@
 from datetime import datetime
 
-from sqlalchemy import Column, Integer, DateTime, Float
+from sqlalchemy.orm import Mapped, mapped_column
 
-from src.database import Base
+from src.database import BaseModel
 
 
-class Conta(Base):
+class Conta(BaseModel):
     __tablename__ = "transacoes"
 
-    numero_de_conta: int = Column(Integer, primary_key=True, index=True, nullable=False)
-    created_at: datetime = Column(DateTime, nullable=False)
-    valor: float = Column(Float, nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    numero_de_conta: Mapped[int] = mapped_column(unique=True, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(nullable=False)
+    valor: Mapped[float] = mapped_column(nullable=False)
