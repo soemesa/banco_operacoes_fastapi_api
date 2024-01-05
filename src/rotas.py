@@ -45,3 +45,20 @@ def create_transacao(response: Response, transacao: TransacaoEntrada, session: S
     nova_transacao = service.inserir_transacao(response, transacao, session)
 
     return nova_transacao
+
+
+@router.put('/transacoes/{numero_de_conta}', response_model=TransacaoSaida, status_code=200)
+def update_transacao(numero_de_conta: int, response: Response, transacao: TransacaoEntrada,
+                     session: Session = Depends(get_session)):
+    service = Service()
+    nova_conta = service.atualizar_transacao(numero_de_conta, response, transacao, session)
+
+    return nova_conta
+
+
+@router.delete('/transacoes/{numero_de_conta}', response_model=TransacaoSaida, status_code=200)
+def delete_transacao(numero_de_conta: int, response: Response, session: Session = Depends(get_session)):
+    service = Service()
+    transacao = service.apagar_transacao(numero_de_conta, response, session)
+
+    return transacao
